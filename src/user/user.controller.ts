@@ -8,16 +8,16 @@ export class UserController {
 
     @Post()
     addUser(@Body() userToCreateDto: UserToCreateDto) {
-        return this.userService.addUser(userToCreateDto.email);
+        // return this.userService.addUser(userToCreateDto.email);
     }
 
     @Get(':email')
     getUser(@Param('email') email: string) {
-        return this.userService.getUser(email);
+        // return this.userService.getUser(email);
     }
 
     @Delete()
     resetData() {
-        return this.userService.resetData();
+        // return this.userService.resetData();
     }
 }
