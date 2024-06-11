@@ -1,4 +1,4 @@
-# Évaluation finale Nestjs
+# Projet Nestjs GraphQL
  - Team : Kevin 
  - DB : POSTGRES 
  - ORM : SEQUELIZE
