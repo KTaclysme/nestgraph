@@ -1,10 +1,10 @@
-import { Param, Query } from '@nestjs/common';
+import { Param } from '@nestjs/common';
 import { UserService } from './user.service';
-import { Resolver } from '@nestjs/graphql';
+import { Resolver, Query } from '@nestjs/graphql';
 import { User } from './models/user.model';
 
 @Resolver((of) => User)
-export class UserController {
+export class UserResolver {
     constructor(private readonly userService: UserService) {}
 
     // @Post()
