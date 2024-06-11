@@ -41,7 +41,7 @@ export class TaskService {
     }
 
     async getUserTasks(userId: number): Promise<TaskEntity[]> {
-        await this._userService.getUserId(userId);
+        // await this._userService.getUserId(userId);
 
         try {
             const tasks: TaskEntity[] =
