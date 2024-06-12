@@ -1,11 +1,13 @@
 import { Field, ObjectType } from '@nestjs/graphql';
+import { Model, Table } from 'sequelize-typescript';
 import { Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType({ description: 'user' })
-export class User {
+@Table
+export class User extends Model {
     @Field()
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+    @PrimaryGeneratedColumn()
+    id: number;
 
     @Field()
     @Column('text', { nullable: false })

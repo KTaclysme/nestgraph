@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 // import { Task } from '../../task/task.model';
-// import { User } from '../../user/models/user.model';
+import { User } from '../../user/models/user.model';
 
 export const databaseProviders = [
     {
@@ -15,7 +15,7 @@ export const databaseProviders = [
                 database: 'postgres',
                 logging: false,
             });
-            // sequelize.addModels([User, Task]);
+            sequelize.addModels([User]);
             await sequelize.sync();
             console.log(
                 `Base de donnée opérationnelle sur le port ${sequelize.options.port}`,

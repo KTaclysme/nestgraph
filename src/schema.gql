@@ -6,10 +6,15 @@ directive @upper on FIELD_DEFINITION
 
 """user"""
 type User {
-  id: String!
+  id: Float!
   email: String!
 }
 
 type Query {
-  getUser: User!
+  user(id: Float!): User!
+  getUser(email: String!): User!
+}
+
+type Mutation {
+  addUser(email: String!): User!
 }
