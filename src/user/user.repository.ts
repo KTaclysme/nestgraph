@@ -1,10 +1,9 @@
 import { User } from './models/user.model';
 
 export class UserRepository {
-    constructor() {}
-
-    addUser(email: string): Promise<User> {
-        return User.create({ email });
+    async addUser(email: string): Promise<User> {
+        console.log('popo3, UserRepository', { email });
+        return await User.create({ email });
     }
 
     async getUserByEmail(email: string): Promise<User | null> {
