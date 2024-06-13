@@ -4,6 +4,7 @@ export class UserRepository {
     constructor() {}
 
     addUser(email: string): Promise<User> {
+        console.log('popo3', email);
         return User.create({ email });
     }
 

@@ -12,6 +12,7 @@ export class UserService {
 
     async addUser(email: string): Promise<UserEntity> {
         try {
+            console.log('popo2');
             const newUser = await this._userRepository.addUser(email);
             return newUser;
         } catch (error) {
