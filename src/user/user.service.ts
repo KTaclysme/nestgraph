@@ -12,11 +12,12 @@ export class UserService {
 
     async addUser(email: string): Promise<UserEntity> {
         try {
-            console.log('popo2, UserService', {email});
+            console.log('popo2, UserService', { email });
             const newUser = await this._userRepository.addUser(email);
-            console.log('popo2bis, UserService', {newUser})
+            console.log('popo2bis, UserService', { newUser });
             return newUser;
         } catch (error) {
+            console.log('erreur', { error });
             if (error instanceof ValidationError) {
                 const validationErrorItems: ValidationErrorItem[] =
                     error.errors;
