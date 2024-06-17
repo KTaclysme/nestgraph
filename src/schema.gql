@@ -17,4 +17,5 @@ type Query {
 
 type Mutation {
   addUser(email: String!): User!
+  deleteUser(id: Float!): User!
 }
