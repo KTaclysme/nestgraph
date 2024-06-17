@@ -13,7 +13,7 @@ export class UserRepository {
         return await User.findOne({ where: { id: userId } });
     }
 
-    async deleteUser(id: number): Promise< number | null> {
-        return await User.destroy({ where: {id}});
+    async deleteUser(id: number): Promise<number | null> {
+        return await User.destroy({ where: { id } });
     }
 }
