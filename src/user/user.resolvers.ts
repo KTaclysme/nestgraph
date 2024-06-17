@@ -9,7 +9,6 @@ export class UserResolver {
 
     @Mutation(returns => User)
     async addUser(@Args('email') email: string): Promise<User> {
-        console.log('popo1 UserResolver', {email});
         return await this.userService.addUser(email);
     }
 
