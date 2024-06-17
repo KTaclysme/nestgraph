@@ -15,7 +15,6 @@ export class UserService {
             const newUser = await this._userRepository.addUser(email);
             return newUser;
         } catch (error) {
-            console.log('erreur', { error });
             if (error instanceof ValidationError) {
                 const validationErrorItems: ValidationErrorItem[] =
                     error.errors;
@@ -47,11 +46,12 @@ export class UserService {
         return user;
     }
 
-    async resetData(): Promise<void> {
-        try {
-            // await this._userRepository.resetData();
-        } catch (error) {
-            throw error;
+    async deleteUser(id: number): Promise<number> {
+
+        const user =  await this._userRepository.getUserByUserId(id);
+        if (!user) {
+            return null
         }
+        return await this._userRepository.deleteUser(id);
     }
 }

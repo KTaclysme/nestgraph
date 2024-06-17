@@ -22,9 +22,8 @@ export class UserResolver {
         return await this.userService.getUser(email);
     }
 
-    //ajouter un delete
-    // @Delete()
-    // resetData() {
-    //     return this.userService.resetData();
-    // }
+    @Mutation(returns => User)
+    async deleteUser(@Args('id') id: number): Promise<number> {
+        return await this.userService.deleteUser(id);
+    }
 }

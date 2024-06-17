@@ -13,7 +13,7 @@ export class UserRepository {
         return await User.findOne({ where: { id: userId } });
     }
 
-    // async resetData() {
-    //     return await User.destroy({ where: {}, truncate: true });
-    // }
+    async deleteUser(id: number): Promise< number | null> {
+        return await User.destroy({ where: {id}});
+    }
 }
