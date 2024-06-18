@@ -1,5 +1,5 @@
 import { UserService } from './user.service';
-import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation, Parent } from '@nestjs/graphql';
 import { User } from './models/user.model';
 // import { UserToCreateDto } from './UserDto/UserToCreate.dto';
 
@@ -25,5 +25,10 @@ export class UserResolver {
     @Mutation((returns) => User)
     async deleteUser(@Args('id') id: number): Promise<number> {
         return await this.userService.deleteUser(id);
+    }
+
+    @Query((returns) => [User])
+    async getAllUser(): Promise<User[]> {
+        return await this.userService.getAllUserId();
     }
 }

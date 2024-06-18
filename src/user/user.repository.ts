@@ -16,4 +16,8 @@ export class UserRepository {
     async deleteUser(id: number): Promise<number | null> {
         return await User.destroy({ where: { id } });
     }
+
+    async getAllUserByUserId(): Promise<User[]> {
+        return await User.findAll();
+    }
 }

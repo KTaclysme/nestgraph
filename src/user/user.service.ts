@@ -53,4 +53,12 @@ export class UserService {
         }
         return await this._userRepository.deleteUser(id);
     }
+
+    async getAllUserId(): Promise<UserEntity[]> {
+        try {
+            return this._userRepository.getAllUserByUserId();
+        } catch (error) {
+            throw error;
+        }
+    }
 }

@@ -13,6 +13,7 @@ type User {
 type Query {
   user(id: Float!): User!
   getUser(email: String!): User!
+  getAllUser: [User!]!
 }
 
 type Mutation {
