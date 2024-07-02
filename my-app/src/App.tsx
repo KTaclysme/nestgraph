@@ -1,14 +1,18 @@
 import React from "react"
+import { Button } from "./button";
+
 export default function App() {
 
   return (
     <div>
-      <h1>GraphQL</h1>
+      <h1>GRAPHQL</h1>
       <div>
-        <input></input>
-        <input></input>
+        <input>
+        </input>
+        <input>
+        </input>
       </div>
-      <button>Valider</button>
+      <Button title="valider" />
     </div>
   );
 }
