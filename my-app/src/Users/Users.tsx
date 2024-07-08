@@ -1,14 +1,6 @@
 import React from 'react';
-import { useQuery, gql } from '@apollo/client';
-
-const GET_ALL_USERS = gql`
-  query GetAllUsers {
-    getAllUser {
-      id
-      email
-    }
-  }
-`;
+import { useQuery } from '@apollo/client';
+import { GET_ALL_USERS } from '../apollo/queries';
 
 const Users: React.FC = () => {
   const { loading, error, data } = useQuery(GET_ALL_USERS);
@@ -19,8 +11,8 @@ const Users: React.FC = () => {
   return (
     <div>
       {data.getAllUser.map((user: { id: number; email: string }) => (
-        <div key={user.id}>{user.email}</div>
-      ))}
+      <div key={user.id}>{user.email}</div> 
+    ))}
     </div>
   );
 };

@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
-import { useMutation, gql } from '@apollo/client';
-
-const DELETE_USER = gql`
-  mutation DeleteUser($id: Float!) {
-    deleteUser(id: $id) {
-      id
-      email
-    }
-  }
-`;
+import { useMutation } from '@apollo/client';
+import { DELETE_USER } from '../apollo/queries';
 
 const DeleteUser: React.FC = () => {
   const [id, setId] = useState('');

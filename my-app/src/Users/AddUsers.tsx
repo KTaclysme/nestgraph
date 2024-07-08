@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
-import { useMutation, gql } from '@apollo/client';
-
-const ADD_USER = gql`
-  mutation AddUser($email: String!) {
-    addUser(email: $email) {
-      id
-      email
-    }
-  }
-`;
+import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../apollo/mutations';
 
 const AddUser: React.FC = () => {
   const [email, setEmail] = useState('');
