@@ -1,5 +1,13 @@
+import { InputType, Field, Int, Float } from '@nestjs/graphql';
+
+@InputType()
 export class TaskToCreateDto {
-    userId: number;
-    name: string;
-    priority: number;
+  @Field()
+  name: string;
+
+  @Field(() => Int)
+  userId: number;
+
+  @Field(() => Float)
+  priority: number;
 }

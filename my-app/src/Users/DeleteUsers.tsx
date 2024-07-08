@@ -1,29 +1,24 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { DELETE_USER } from '../apollo/queries';
+import { DELETE_USER } from '../apollo/mutations';
 
-const DeleteUser: React.FC = () => {
-  const [id, setId] = useState('');
+const DeleteUser: React.FC<{ userId: number; onDeleted: () => void }> = ({ userId, onDeleted }) => {
   const [deleteUser, { data, loading, error }] = useMutation(DELETE_USER);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    deleteUser({ variables: { id: parseFloat(id) } });
+  const handleDelete = async () => {
+    try {
+      await deleteUser({ variables: { id: userId } });
+      onDeleted(); 
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="number" 
-          value={id} 
-          onChange={(e) => setId(e.target.value)} 
-          placeholder="User ID" 
-          required 
-        />
-        <button type="submit">Delete User</button>
-      </form>
-      {loading && <p>Loading...</p>}
+      <button onClick={handleDelete} disabled={loading}>
+        {loading ? 'Deleting...' : 'Delete User'}
+      </button>
       {error && <p>Error: {error.message}</p>}
       {data && <p>User deleted: {data.deleteUser.email}</p>}
     </div>

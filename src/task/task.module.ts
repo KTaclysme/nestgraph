@@ -1,13 +1,12 @@
 import { Module, forwardRef } from '@nestjs/common';
 import { TaskService } from './task.service';
-import { TaskController } from './task.controller';
 import { AppModule } from '../app.module';
 import { TaskRepository } from './task.repository';
+import { TaskResolver } from './task.resolvers';
 
 @Module({
-    controllers: [TaskController],
     imports: [forwardRef(() => AppModule)],
-    providers: [TaskService, TaskRepository],
-    exports: [TaskService, TaskRepository],
+    providers: [TaskResolver,TaskService, TaskRepository],
+    exports: [TaskResolver, TaskService, TaskRepository],
 })
 export class TaskModule {}

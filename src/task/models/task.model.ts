@@ -1,15 +1,16 @@
+import { Field, ObjectType } from '@nestjs/graphql';
 import {
     Column,
     DataType,
-    // ForeignKey,
     Model,
     Table,
 } from 'sequelize-typescript';
-// import { User } from '../user/models/user.model';
+
 
 @Table
+@ObjectType({ description: 'task' })
 export class Task extends Model {
-    // @ForeignKey(() => User)
+    @Field()
     @Column({
         type: DataType.INTEGER,
         allowNull: false,
@@ -20,6 +21,7 @@ export class Task extends Model {
     })
     userId: number;
 
+    @Field()
     @Column({
         type: DataType.STRING,
         allowNull: false,
@@ -29,6 +31,7 @@ export class Task extends Model {
     })
     name: string;
 
+    @Field()
     @Column({
         type: DataType.INTEGER,
         allowNull: false,

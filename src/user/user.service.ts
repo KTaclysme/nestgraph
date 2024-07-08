@@ -31,6 +31,7 @@ export class UserService {
             throw error;
         }
     }
+    
     async getUserId(userId: number): Promise<UserEntity> {
         const userIdParsed = String(userId);
 
@@ -46,12 +47,13 @@ export class UserService {
         return user;
     }
 
-    async deleteUser(id: number): Promise<number> {
-        const user = await this._userRepository.getUserByUserId(id);
-        if (!user) {
-            return null;
+    async deleteUser(id: number): Promise<UserEntity | null> {
+        const userToDelete = await this._userRepository.getUserByUserId(id);
+        if (!userToDelete) {
+            return null; 
         }
-        return await this._userRepository.deleteUser(id);
+        await this._userRepository.deleteUser(id);
+        return userToDelete; 
     }
 
     async getAllUserId(): Promise<UserEntity[]> {

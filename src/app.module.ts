@@ -9,12 +9,12 @@ import { DirectiveLocation, GraphQLDirective } from 'graphql';
 
 @Module({
     imports: [
-        TaskModule,
-        UserModule,
+        
         DatabaseModule,
         GraphQLModule.forRoot<ApolloDriverConfig>({
             driver: ApolloDriver,
             autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+            sortSchema: true,
             installSubscriptionHandlers: true,
             buildSchemaOptions: {
                 directives: [
@@ -25,6 +25,8 @@ import { DirectiveLocation, GraphQLDirective } from 'graphql';
                 ],
             },
         }),
+        TaskModule,
+        UserModule,
     ],
     providers: [DatabaseModule],
     exports: [UserModule, TaskModule],

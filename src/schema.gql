@@ -4,19 +4,30 @@
 
 directive @upper on FIELD_DEFINITION
 
-"""user"""
-type User {
-  id: Float!
-  email: String!
+type Mutation {
+  addTask(name: String!, priority: Float!, userId: Float!): Task!
+  addUser(email: String!): User!
+  deleteTask(name: String!): Task!
+  deleteUser(id: Float!): User!
 }
 
 type Query {
-  user(id: Float!): User!
-  getUser(email: String!): User!
   getAllUser: [User!]!
+  getTaskByName(name: String!): Task!
+  getUser(email: String!): User!
+  getUserTasks: [Task!]!
+  user(id: Float!): User!
 }
 
-type Mutation {
-  addUser(email: String!): User!
-  deleteUser(id: Float!): User!
+"""task"""
+type Task {
+  name: String!
+  priority: Float!
+  userId: Float!
+}
+
+"""user"""
+type User {
+  email: String!
+  id: Float!
 }

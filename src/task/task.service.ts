@@ -17,13 +17,17 @@ export class TaskService {
         priority: number,
     ): Promise<TaskEntity> {
         try {
+            console.log('popo1')
             const newTask = await this._taskRepository.addTask(
                 name,
                 userId,
                 priority,
-            );
+            );            
+            console.log({newTask})
             return newTask;
         } catch (error) {
+            console.log('popo2')
+            console.log({error})
             if (error instanceof ValidationError) {
                 const validationErrorItems: ValidationErrorItem[] =
                     error.errors;
@@ -40,23 +44,22 @@ export class TaskService {
         }
     }
 
-    async getUserTasks(userId: number): Promise<TaskEntity[]> {
-        // await this._userService.getUserId(userId);
-
+    async getUserTasks(): Promise<TaskEntity[]> {
         try {
             const tasks: TaskEntity[] =
-                await this._taskRepository.getUserTasksById(userId);
+                await this._taskRepository.getUserTasksById();
             return tasks;
         } catch (error) {
             throw error;
         }
     }
 
-    async resetData(): Promise<void> {
-        try {
-            await this._taskRepository.resetData();
-        } catch (error) {
-            throw error;
+    async deleteTask(name: string): Promise<TaskEntity | null> {
+        const taskToDelete = await this._taskRepository.getTaskByName(name);
+        if (!taskToDelete) {
+            return null; 
         }
+        await this._taskRepository.deleteTask(name);
+        return taskToDelete
     }
 }

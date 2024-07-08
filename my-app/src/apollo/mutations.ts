@@ -19,12 +19,18 @@ export const ADD_TASK = gql`
   }
 `;
 
-export const GET_USER_TASKS = gql`
-  query GetUserTasks($userId: Float!) {
-    getUserTasks(userId: $userId) {
+export const DELETE_USER = gql`
+  mutation DeleteUser($id: Float!) {
+    deleteUser(id: $id) {
       id
+    }
+  }
+`;
+
+export const DELETE_TASK = gql`
+  mutation DeleteTask($name: String!) {
+    deleteTask(name: $name) {
       name
-      priority
     }
   }
 `;

@@ -1,5 +1,5 @@
 import { Table } from 'sequelize-typescript';
-import { Task } from './task.model';
+import { Task } from './models/task.model';
 
 @Table
 export class TaskEntity extends Task {

@@ -2,83 +2,70 @@ import React, { useState } from 'react';
 import { useMutation } from "@apollo/client";
 import { ADD_TASK } from '../apollo/mutations';
 import { Task } from '../types';
-import { cp } from 'fs';
+import { GET_USER_TASKS } from '../apollo/queries';
 
-interface AddUserForm {
+interface AddTaskForm {
   name: string;
   priority: number;
   userId: number;
 }
 
 const TaskForm: React.FC = () => {
-  
-  const [formData, setFormData] = useState<AddUserForm>({
+  const [formData, setFormData] = useState<AddTaskForm>({
     name: "",
     priority: 1,
     userId: 1,
   });
-  
-  const [addTask, { loading, error }] = useMutation<{ addTask: Task }>(ADD_TASK);
 
+  const [addTask, { loading, error }] = useMutation<{ addTask: Task }>(ADD_TASK, {
+    refetchQueries: [{ query: GET_USER_TASKS, variables: { userId: formData.userId } }],
+    onError: (error) => {
+      console.error("Error adding task:", error);
+    },
+    onCompleted: () => {
+      setFormData({ name: "", priority: 1, userId: 1 });
+      console.log("Task added successfully!");
+    }
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    console.log(name, value);
-    
     setFormData({ ...formData, [name]: value });
-};
-
-const handleAddUser = async () => {
-  try {
-      // @ts-expect-error -ignore
-      await addTask({
-          variables: {
-              createUserInput: {
-                name: formData.name,
-                priority: parseInt(formData && formData.priority),
-                  userId: formData.userId,
-              },
-          },
-      });
-      setFormData({ priority: 1, name: "", userId: 1 });
-  } catch (error) {
-      console.error("Erreur lors de l'ajout d'utilisateur:", error);
-  }
-};
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      // const priority = formData.priority ? parseInt(formData.priority) : undefined;  
-      // const userId = formData.userId ? parseInt(formData.userId) : undefined;    
-      const { data } = await addTask({
-        variables: { name, priority, userId }
+      await addTask({
+        variables: {
+          name: formData.name,
+          priority: parseInt(formData.priority.toString()),
+          userId: parseInt(formData.userId.toString())
+        }
       });
-      
-      console.log('Task added:', data?.addTask);
-    } catch (err) {
-      console.error('Failed to add task:', err);
+    } catch (error) {
+      console.error("Error adding task:", error);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <input
-      name = "name"
+        name="name"
         type="text"
         placeholder="Task name"
         value={formData.name}
         onChange={handleChange}
       />
       <input
-      name = "priority"
+        name="priority"
         type="number"
         placeholder="Priority"
         value={formData.priority}
         onChange={handleChange}
       />
       <input
-      name = "userId"
+        name="userId"
         type="number"
         placeholder="User ID"
         value={formData.userId}

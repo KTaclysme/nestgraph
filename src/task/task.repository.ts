@@ -1,4 +1,4 @@
-import { Task } from './task.model';
+import { Task } from './models/task.model';
 
 export class TaskRepository {
     constructor() {}
@@ -10,11 +10,11 @@ export class TaskRepository {
         return await Task.findOne({ where: { name } });
     }
 
-    async getUserTasksById(userId: number): Promise<Task[]> {
-        return await Task.findAll({ where: { userId } });
+    async getUserTasksById(): Promise<Task[]> {
+        return await Task.findAll();
     }
 
-    async resetData() {
-        return await Task.destroy({ where: {}, truncate: true });
+    async deleteTask(name: string) {
+        await Task.destroy({ where: {name} });
     }
 }
